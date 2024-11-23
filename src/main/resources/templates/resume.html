@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Upload</title>
+    <link rel="stylesheet" type="text/css" href="/css/style1.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        main {
+            margin: 20px auto;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        #upload-status {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .btn:hover {
+            background-color: rgb(13, 114, 27);
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+<header>
+    Welcome to Magadh University
+</header>
+<main>
+    <h1>Upload Your Resume</h1>
+
+    <!-- User feedback message -->
+    <p id="upload-status" style="color: red; display: none;">Error: Please try again.</p>
+
+    <!-- Form for uploading resumes -->
+    <form action="/resumes/upload" method="post" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm mx-auto">
+        <div class="form-group">
+            <label for="name" aria-label="Name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" required pattern="[A-Za-z\s]+"
+                   title="Only letters and spaces are allowed" placeholder="Enter your name" />
+        </div>
+
+        <div class="form-group">
+            <label for="email" aria-label="Email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+            <label for="jobRole" aria-label="Job Role">Job Role</label>
+            <select id="jobRole" name="jobRole" class="form-control" required>
+                <option value="" disabled selected>Select your job role</option>
+                <option value="Software Developer">Software Developer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Product Manager">Product Manager</option>
+                <option value="Quality Analyst">Quality Analyst</option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+                <option value="UX Designer">UX Designer</option>
+                <option value="Cloud Engineer">Cloud Engineer</option>
+                <option value="Mobile App Developer">Mobile App Developer</option>
+                <option value="Business Analyst">Business Analyst</option>
+                <option value="Cybersecurity Specialist">Cybersecurity Specialist</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="resume" aria-label="Resume">Upload Resume (PDF only)</label>
+            <input type="file" id="resume" name="resume" accept="application/pdf" class="form-control" required />
+        </div>
+
+        <button type="submit" style="background-color: rgb(16, 147, 35); color: white;" class="btn">Submit</button>
+    </form>
+</main>
+<script>
+    // Display feedback messages dynamically
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const status = document.getElementById('upload-status');
+        status.style.display = 'none'; // Hide status before submission
+
+        // Simulate form submission feedback (you can adapt this with backend integration)
+        if (!document.getElementById('resume').value) {
+            e.preventDefault();
+            status.style.display = 'block';
+            status.textContent = "Error: Resume file is required!";
+        }
+    });
+</script>
+</body>
+</html>
